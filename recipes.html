@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipes | PANNA LAB by BROS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Cormorant+Garamond:wght@300;400;500;600&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --cream: #FFF8F0;
+            --deep-cream: #FFEFD5;
+            --caramel: #D4A574;
+            --rich-brown: #8B4513;
+            --chocolate: #3E2723;
+            --accent-gold: #D4AF37;
+            --soft-pink: #FFE4E1;
+            --berry: #C1666B;
+            --shadow: rgba(139, 69, 19, 0.1);
+            --text-primary: #2C1810;
+            --text-secondary: #6B4423;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cormorant Garamond', serif;
+            background: linear-gradient(135deg, var(--cream) 0%, var(--deep-cream) 100%);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(255, 228, 225, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(212, 165, 116, 0.2) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 5%;
+            background: rgba(255, 248, 240, 0.95);
+            backdrop-filter: blur(12px);
+            box-shadow: 0 4px 20px var(--shadow);
+            z-index: 1000;
+            animation: slideDown 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--chocolate);
+            letter-spacing: 1px;
+            position: relative;
+            text-decoration: none;
+        }
+
+        .logo::after {
+            content: '🍮';
+            position: absolute;
+            top: -10px;
+            right: -35px;
+            font-size: 1.5rem;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-8px) rotate(5deg); }
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            font-weight: 500;
+            position: relative;
+            transition: color 0.3s ease;
+            font-family: 'Cormorant Garamond', serif;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--caramel);
+            transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--rich-brown);
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        /* Page Header */
+        .page-header {
+            padding: 10rem 5% 4rem;
+            text-align: center;
+            background: linear-gradient(135deg, rgba(255, 228, 225, 0.4), rgba(255, 248, 240, 0.6));
+        }
+
+        .page-header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 5rem;
+            font-weight: 900;
+            color: var(--chocolate);
+            margin-bottom: 1rem;
+            animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .page-header h1 span {
+            background: linear-gradient(135deg, var(--caramel), var(--accent-gold));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .page-header p {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            max-width: 800px;
+            margin: 0 auto;
+            animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.1s backwards;
+        }
+
+        .page-header .subtitle-ar {
+            font-family: 'Amiri', serif;
+            font-size: 1.8rem;
+            color: var(--caramel);
+            margin-top: 1rem;
+            direction: rtl;
+            animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.2s backwards;
+        }
+
+        /* Classic Recipe Section */
+        .classic-section {
+            padding: 4rem 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .recipe-card {
+            background: white;
+            border-radius: 30px;
+            padding: 3.5rem;
+            box-shadow: 0 15px 50px var(--shadow);
+            margin-bottom: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .recipe-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 8px;
+            background: linear-gradient(90deg, var(--caramel), var(--accent-gold), var(--berry));
+        }
+
+        .recipe-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 900;
+            color: var(--chocolate);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .recipe-title-ar {
+            font-family: 'Amiri', serif;
+            font-size: 2rem;
+            color: var(--caramel);
+            margin-bottom: 2rem;
+            direction: rtl;
+        }
+
+        .recipe-meta {
+            display: flex;
+            gap: 3rem;
+            margin-bottom: 2.5rem;
+            flex-wrap: wrap;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+        }
+
+        .meta-item span:first-child {
+            font-size: 1.5rem;
+        }
+
+        .recipe-section {
+            margin-bottom: 2.5rem;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--rich-brown);
+            margin-bottom: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .ingredient-list,
+        .instruction-list {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .ingredient-list li,
+        .instruction-list li {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            padding-left: 2rem;
+            position: relative;
+            line-height: 1.6;
+        }
+
+        .ingredient-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--caramel);
+            font-weight: bold;
+            font-size: 1.3rem;
+        }
+
+        .instruction-list {
+            counter-reset: step-counter;
+        }
+
+        .instruction-list li {
+            counter-increment: step-counter;
+        }
+
+        .instruction-list li::before {
+            content: counter(step-counter);
+            position: absolute;
+            left: 0;
+            background: linear-gradient(135deg, var(--caramel), var(--accent-gold));
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        /* Pro Tips */
+        .pro-tips {
+            background: linear-gradient(135deg, rgba(212, 165, 116, 0.1), rgba(255, 228, 225, 0.15));
+            border-left: 5px solid var(--caramel);
+            padding: 2rem;
+            border-radius: 15px;
+            margin-top: 2rem;
+        }
+
+        .pro-tips h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            color: var(--chocolate);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .pro-tips ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .pro-tips li {
+            font-size: 1.15rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.8rem;
+            padding-left: 1.8rem;
+            position: relative;
+        }
+
+        .pro-tips li::before {
+            content: '💡';
+            position: absolute;
+            left: 0;
+        }
+
+        /* Flavors Grid */
+        .flavors-section {
+            padding: 4rem 5%;
+            background: linear-gradient(180deg, transparent, rgba(255, 228, 225, 0.2));
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            font-weight: 900;
+            color: var(--chocolate);
+            margin-bottom: 1rem;
+        }
+
+        .section-header p {
+            font-family: 'Amiri', serif;
+            font-size: 1.8rem;
+            color: var(--text-secondary);
+            direction: rtl;
+        }
+
+        .flavors-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .flavor-card {
+            background: white;
+            border-radius: 25px;
+            padding: 2.5rem;
+            box-shadow: 0 10px 40px var(--shadow);
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .flavor-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(139, 69, 19, 0.2);
+        }
+
+        .flavor-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .flavor-icon {
+            font-size: 3.5rem;
+        }
+
+        .flavor-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--chocolate);
+        }
+
+        .flavor-name-ar {
+            font-family: 'Amiri', serif;
+            font-size: 1.4rem;
+            color: var(--caramel);
+            direction: rtl;
+        }
+
+        .flavor-ingredients {
+            margin-top: 1.5rem;
+        }
+
+        .flavor-ingredients h5 {
+            font-size: 1.3rem;
+            color: var(--rich-brown);
+            margin-bottom: 0.8rem;
+            font-weight: 600;
+        }
+
+        .flavor-ingredients ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .flavor-ingredients li {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .flavor-ingredients li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: var(--caramel);
+            font-weight: bold;
+        }
+
+        /* Strategy Section */
+        .strategy-section {
+            padding: 5rem 5%;
+            background: linear-gradient(135deg, var(--chocolate), var(--rich-brown));
+            color: white;
+        }
+
+        .strategy-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .strategy-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .strategy-header h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+        }
+
+        .strategy-header p {
+            font-family: 'Amiri', serif;
+            font-size: 1.8rem;
+            color: var(--accent-gold);
+            direction: rtl;
+        }
+
+        .strategy-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .strategy-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .strategy-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .strategy-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .strategy-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--accent-gold);
+        }
+
+        .strategy-card p {
+            font-size: 1.15rem;
+            line-height: 1.7;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--chocolate);
+            color: var(--cream);
+            text-align: center;
+            padding: 2rem 5%;
+            font-size: 1.1rem;
+        }
+
+        footer a {
+            color: var(--accent-gold);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        footer a:hover {
+            color: var(--caramel);
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .page-header h1 {
+                font-size: 3.5rem;
+            }
+
+            .recipe-title {
+                font-size: 2.2rem;
+            }
+
+            .flavors-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-header h2 {
+                font-size: 3rem;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 1rem;
+            }
+
+            .page-header h1 {
+                font-size: 2.5rem;
+            }
+
+            .recipe-card {
+                padding: 2rem;
+            }
+
+            .strategy-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">PANNA LAB</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home | الرئيسية</a></li>
+                <li><a href="recipes.html" class="active">Recipes | الوصفات</a></li>
+                <li><a href="index.html#menu">Menu | القائمة</a></li>
+                <li><a href="index.html#about">About | حولنا</a></li>
+                <li><a href="index.html#contact">Contact | تواصل</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <h1>Master the Art of <span>Panna Cotta</span></h1>
+        <p>Discover our signature recipes and professional techniques from PANNA LAB by BROS</p>
+        <p class="subtitle-ar">اكتشف وصفاتنا المميزة والتقنيات الاحترافية</p>
+    </section>
+
+    <!-- Classic Recipe -->
+    <section class="classic-section">
+        <div class="recipe-card">
+            <h2 class="recipe-title">
+                <span>🍮</span>
+                Classic Panna Cotta Base
+            </h2>
+            <p class="recipe-title-ar">الوصفة الكلاسيكية الأساسية</p>
+
+            <div class="recipe-meta">
+                <div class="meta-item">
+                    <span>⏱️</span>
+                    <span><strong>Prep:</strong> 15 min</span>
+                </div>
+                <div class="meta-item">
+                    <span>❄️</span>
+                    <span><strong>Chill:</strong> 4-6 hours</span>
+                </div>
+                <div class="meta-item">
+                    <span>🍽️</span>
+                    <span><strong>Serves:</strong> 6-8 portions</span>
+                </div>
+            </div>
+
+            <div class="recipe-section">
+                <h3 class="section-title">
+                    <span>📝</span>
+                    Ingredients
+                </h3>
+                <ul class="ingredient-list">
+                    <li>500ml heavy cream (35% fat content)</li>
+                    <li>250ml whole milk</li>
+                    <li>100g granulated sugar</li>
+                    <li>2 teaspoons pure vanilla extract (or 1 vanilla bean)</li>
+                    <li>3 sheets gelatin (or 7g powdered gelatin)</li>
+                    <li>Pinch of salt</li>
+                </ul>
+            </div>
+
+            <div class="recipe-section">
+                <h3 class="section-title">
+                    <span>👨‍🍳</span>
+                    Instructions
+                </h3>
+                <ol class="instruction-list">
+                    <li>Bloom the gelatin sheets in cold water for 5-10 minutes until soft. If using powder, bloom in 3 tablespoons cold water.</li>
+                    <li>In a saucepan, combine cream, milk, sugar, and salt. Heat over medium heat, stirring occasionally until sugar dissolves completely. Do not boil.</li>
+                    <li>Once the mixture is hot (around 70°C), remove from heat. Squeeze excess water from gelatin sheets and add to the warm cream mixture. Stir until completely dissolved.</li>
+                    <li>Add vanilla extract (or scrape vanilla bean seeds into mixture). Stir well to combine.</li>
+                    <li>Strain the mixture through a fine-mesh sieve into a clean bowl to remove any lumps.</li>
+                    <li>Pour into serving glasses or ramekins, filling about ⅔ full to leave room for toppings.</li>
+                    <li>Cover with plastic wrap and refrigerate for at least 4-6 hours, or overnight for best results.</li>
+                    <li>Once set, add your favorite flavor topping and serve chilled.</li>
+                </ol>
+            </div>
+
+            <div class="pro-tips">
+                <h4>💎 BROS Professional Tips</h4>
+                <ul>
+                    <li><strong>Temperature Control:</strong> Never let the cream mixture boil as it can affect the gelatin's setting ability and create a grainy texture.</li>
+                    <li><strong>Gelatin Quality:</strong> Use high-quality gelatin for the smoothest texture. Sheet gelatin gives superior results.</li>
+                    <li><strong>Straining is Essential:</strong> Always strain your mixture to achieve that signature silky-smooth texture.</li>
+                    <li><strong>Serving Vessels:</strong> Use clear glasses to showcase the beautiful layers when adding fruit toppings.</li>
+                    <li><strong>Make-Ahead:</strong> Panna cotta can be made 2-3 days in advance, making it perfect for batch production.</li>
+                    <li><strong>Setting Time:</strong> For faster service during Ramadan rush, use smaller portions that set in 2-3 hours.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Flavor Variations -->
+    <section class="flavors-section">
+        <div class="section-header">
+            <h2>Signature Flavor Toppings</h2>
+            <p>توبينغات النكهات المميزة</p>
+        </div>
+
+        <div class="flavors-grid">
+            <!-- Mango -->
+            <div class="flavor-card">
+                <div class="flavor-header">
+                    <span class="flavor-icon">🥭</span>
+                    <div>
+                        <h3 class="flavor-name">Mango Topping</h3>
+                        <p class="flavor-name-ar">طبقة المانجو</p>
+                    </div>
+                </div>
+                <div class="flavor-ingredients">
+                    <h5>Ingredients:</h5>
+                    <ul>
+                        <li>300g fresh or frozen mango chunks</li>
+                        <li>50g sugar (adjust to taste)</li>
+                        <li>2 tablespoons lemon juice</li>
+                        <li>1 tablespoon water</li>
+                    </ul>
+                    <h5 style="margin-top: 1.2rem;">Method:</h5>
+                    <p style="font-size: 1.1rem; color: var(--text-secondary); margin-top: 0.5rem; line-height: 1.6;">
+                        Blend mango, sugar, lemon juice, and water until smooth. Strain for silky texture. 
+                        Gently pour over set panna cotta. Refrigerate for 30 minutes before serving.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Strawberry -->
+            <div class="flavor-card">
+                <div class="flavor-header">
+                    <span class="flavor-icon">🍓</span>
+                    <div>
+                        <h3 class="flavor-name">Strawberry Topping</h3>
+                        <p class="flavor-name-ar">طبقة الفراولة</p>
+                    </div>
+                </div>
+                <div class="flavor-ingredients">
+                    <h5>Ingredients:</h5>
+                    <ul>
+                        <li>300g fresh strawberries, hulled</li>
+                        <li>60g sugar</li>
+                        <li>1 tablespoon lemon juice</li>
+                        <li>½ teaspoon vanilla extract</li>
+                    </ul>
+                    <h5 style="margin-top: 1.2rem;">Method:</h5>
+                    <p style="font-size: 1.1rem; color: var(--text-secondary); margin-top: 0.5rem; line-height: 1.6;">
+                        Blend strawberries with sugar and lemon juice. Strain to remove seeds. 
+                        Add vanilla. Layer over panna cotta and chill for 30 minutes to set slightly.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Chocolate Hazelnut -->
+            <div class="flavor-card">
+                <div class="flavor-header">
+                    <span class="flavor-icon">🍫</span>
+                    <div>
+                        <h3 class="flavor-name">Chocolate Hazelnut</h3>
+                        <p class="flavor-name-ar">شوكولاتة بالبندق</p>
+                    </div>
+                </div>
+                <div class="flavor-ingredients">
+                    <h5>Ingredients:</h5>
+                    <ul>
+                        <li>150g Nutella or chocolate hazelnut spread</li>
+                        <li>100ml warm heavy cream</li>
+                        <li>1 tablespoon cocoa powder (optional, for intensity)</li>
+                        <li>Chopped hazelnuts for garnish</li>
+                    </ul>
+                    <h5 style="margin-top: 1.2rem;">Method:</h5>
+                    <p style="font-size: 1.1rem; color: var(--text-secondary); margin-top: 0.5rem; line-height: 1.6;">
+                        Warm cream and whisk in hazelnut spread until smooth and glossy. 
+                        Let cool slightly, then spoon over panna cotta. Top with chopped hazelnuts.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Caramel Banana -->
+            <div class="flavor-card">
+                <div class="flavor-header">
+                    <span class="flavor-icon">🍌</span>
+                    <div>
+                        <h3 class="flavor-name">Caramel Banana</h3>
+                        <p class="flavor-name-ar">كراميل موز</p>
+                    </div>
+                </div>
+                <div class="flavor-ingredients">
+                    <h5>Ingredients:</h5>
+                    <ul>
+                        <li>2 ripe bananas, mashed</li>
+                        <li>100g caramel sauce (homemade or quality store-bought)</li>
+                        <li>1 tablespoon lemon juice</li>
+                        <li>Pinch of cinnamon</li>
+                    </ul>
+                    <h5 style="margin-top: 1.2rem;">Method:</h5>
+                    <p style="font-size: 1.1rem; color: var(--text-secondary); margin-top: 0.5rem; line-height: 1.6;">
+                        Blend bananas with lemon juice and cinnamon until smooth. 
+                        Swirl caramel sauce into banana puree. Layer over panna cotta and drizzle extra caramel on top.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Pineapple -->
+            <div class="flavor-card">
+                <div class="flavor-header">
+                    <span class="flavor-icon">🍍</span>
+                    <div>
+                        <h3 class="flavor-name">Pineapple Topping</h3>
+                        <p class="flavor-name-ar">طبقة الأناناس</p>
+                    </div>
+                </div>
+                <div class="flavor-ingredients">
+                    <h5>Ingredients:</h5>
+                    <ul>
+                        <li>300g fresh pineapple chunks</li>
+                        <li>40g sugar</li>
+                        <li>1 tablespoon lime juice</li>
+                        <li>Fresh mint leaves for garnish</li>
+                    </ul>
+                    <h5 style="margin-top: 1.2rem;">Method:</h5>
+                    <p style="font-size: 1.1rem; color: var(--text-secondary); margin-top: 0.5rem; line-height: 1.6;">
+                        Blend pineapple with sugar and lime juice. Strain for smooth consistency. 
+                        Pour over panna cotta. Garnish with fresh mint and a small pineapple wedge.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Orange Blossom & Honey -->
+            <div class="flavor-card">
+                <div class="flavor-header">
+                    <span class="flavor-icon">🌸</span>
+                    <div>
+                        <h3 class="flavor-name">Orange Blossom & Honey</h3>
+                        <p class="flavor-name-ar">زهرة برتقال + عسل</p>
+                    </div>
+                </div>
+                <div class="flavor-ingredients">
+                    <h5>Ingredients:</h5>
+                    <ul>
+                        <li>100g quality honey</li>
+                        <li>1 tablespoon orange blossom water</li>
+                        <li>Zest of 1 orange</li>
+                        <li>2 tablespoons warm water</li>
+                        <li>Crushed pistachios for garnish</li>
+                    </ul>
+                    <h5 style="margin-top: 1.2rem;">Method:</h5>
+                    <p style="font-size: 1.1rem; color: var(--text-secondary); margin-top: 0.5rem; line-height: 1.6;">
+                        Mix honey with orange blossom water and warm water until smooth. 
+                        Drizzle over panna cotta, garnish with orange zest and crushed pistachios for Algerian flair.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Business Strategy Section -->
+    <section class="strategy-section">
+        <div class="strategy-container">
+            <div class="strategy-header">
+                <h2>BROS Business Strategy Guide</h2>
+                <p>دليل الاستراتيجية التجارية</p>
+            </div>
+
+            <div class="strategy-grid">
+                <div class="strategy-card">
+                    <span class="strategy-icon">🎯</span>
+                    <h3>Ramadan Rush Ready</h3>
+                    <p>
+                        Pre-make classic bases in bulk 24 hours ahead. Store in refrigerators and add fresh toppings 
+                        per order. This allows for 10x faster service during peak iftar hours while maintaining quality. 
+                        Use smaller 100ml portions for quick setting and easier inventory management.
+                    </p>
+                </div>
+
+                <div class="strategy-card">
+                    <span class="strategy-icon">📦</span>
+                    <h3>Smart Packaging</h3>
+                    <p>
+                        Invest in premium clear cups with dome lids to showcase your beautiful layers. 
+                        Include wooden spoons for eco-friendly appeal. Add PANNA LAB by BROS stickers on every cup 
+                        for brand recognition. Create Instagram-worthy packaging that customers want to share.
+                    </p>
+                </div>
+
+                <div class="strategy-card">
+                    <span class="strategy-icon">💰</span>
+                    <h3>Pricing Strategy</h3>
+                    <p>
+                        Position as a premium dessert option. Price 20-30% higher than standard desserts due to 
+                        artisan quality and unique offering. Offer combo deals with Bros Burgers meals. 
+                        Create "Ramadan Special Boxes" with 4-6 different flavors for families.
+                    </p>
+                </div>
+
+                <div class="strategy-card">
+                    <span class="strategy-icon">📱</span>
+                    <h3>Social Media Magic</h3>
+                    <p>
+                        Film the layering process in slow-motion - it's mesmerizing content. Share customer reactions 
+                        during iftar. Post "flavor of the day" stories. Run polls for new flavor ideas. 
+                        Create a signature hashtag #PannaLabExperience for user-generated content.
+                    </p>
+                </div>
+
+                <div class="strategy-card">
+                    <span class="strategy-icon">🔄</span>
+                    <h3>Seasonal Rotation</h3>
+                    <p>
+                        Keep core flavors year-round but introduce limited-edition seasonal flavors monthly. 
+                        This creates urgency and repeat customers. Use local Algerian ingredients like dates, 
+                        figs, or rose water for unique regional flavors that competitors can't easily replicate.
+                    </p>
+                </div>
+
+                <div class="strategy-card">
+                    <span class="strategy-icon">🤝</span>
+                    <h3>Cross-Promotion Power</h3>
+                    <p>
+                        Leverage Bros Burgers' existing customer base. Train burger staff to recommend panna cotta 
+                        as the perfect sweet ending. Create "Complete Meal" promotions. Use shared delivery systems 
+                        to reduce costs. Your dessert completes their savory experience - perfect synergy.
+                    </p>
+                </div>
+
+                <div class="strategy-card">
+                    <span class="strategy-icon">⚡</span>
+                    <h3>Quality Control</h3>
+                    <p>
+                        Maintain strict standards - every panna cotta should have the same silky texture and beautiful 
+                        presentation. Train staff on proper portioning and layering techniques. Taste-test batches daily. 
+                        Quality consistency builds reputation faster than any marketing.
+                    </p>
+                </div>
+
+                <div class="strategy-card">
+                    <span class="strategy-icon">🎁</span>
+                    <h3>Gift & Catering</h3>
+                    <p>
+                        Offer gift boxes for special occasions (Eid, weddings, celebrations). 
+                        Create catering packages for events with mix-and-match flavor options. 
+                        Develop corporate gifting programs. This diversifies revenue beyond daily walk-ins.
+                    </p>
+                </div>
+
+                <div class="strategy-card">
+                    <span class="strategy-icon">📊</span>
+                    <h3>Data-Driven Decisions</h3>
+                    <p>
+                        Track which flavors sell best and when. Monitor customer feedback closely. 
+                        Adjust production based on demand patterns. Use WhatsApp pre-orders to forecast daily needs. 
+                        Minimize waste while ensuring you never run out of bestsellers during peak hours.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2026 PANNA LAB by BROS | <a href="index.html">Back to Home</a></p>
+        <p style="margin-top: 0.5rem; font-size: 0.95rem;">A delicious creation from Bros Burgers</p>
+    </footer>
+</body>
+</html>
