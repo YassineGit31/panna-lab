@@ -143,6 +143,58 @@
             width: 100%;
         }
 
+        /* Language Toggle */
+        .language-toggle {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+            background: white;
+            padding: 0.5rem;
+            border-radius: 50px;
+            box-shadow: 0 4px 15px var(--shadow);
+        }
+
+        .lang-btn {
+            padding: 0.6rem 1.5rem;
+            border: none;
+            background: transparent;
+            color: var(--text-secondary);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.05rem;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 50px;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .lang-btn:hover {
+            color: var(--chocolate);
+        }
+
+        .lang-btn.active {
+            background: linear-gradient(135deg, var(--caramel), var(--accent-gold));
+            color: white;
+            box-shadow: 0 4px 12px rgba(212, 165, 116, 0.3);
+        }
+
+        /* Bilingual Content */
+        .lang-en, .lang-ar {
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+
+        .lang-ar {
+            direction: rtl;
+            font-family: 'Amiri', serif;
+        }
+
+        body[data-lang="en"] .lang-ar {
+            display: none;
+        }
+
+        body[data-lang="ar"] .lang-en {
+            display: none;
+        }
+
         /* Page Header */
         .page-header {
             padding: 10rem 5% 4rem;
@@ -557,6 +609,21 @@
 
         /* Responsive */
         @media (max-width: 968px) {
+            .nav-container {
+                flex-wrap: wrap;
+                gap: 1rem;
+            }
+
+            .nav-links {
+                order: 2;
+                width: 100%;
+                justify-content: center;
+            }
+
+            .language-toggle {
+                order: 1;
+            }
+
             .page-header h1 {
                 font-size: 3.5rem;
             }
@@ -592,6 +659,11 @@
             .strategy-grid {
                 grid-template-columns: 1fr;
             }
+
+            .lang-btn {
+                padding: 0.5rem 1.2rem;
+                font-size: 0.95rem;
+            }
         }
 
         html {
@@ -611,14 +683,20 @@
                 <li><a href="index.html#about">About | حولنا</a></li>
                 <li><a href="index.html#contact">Contact | تواصل</a></li>
             </ul>
+            <div class="language-toggle">
+                <button class="lang-btn active" onclick="setLanguage('en')" data-lang="en">English</button>
+                <button class="lang-btn" onclick="setLanguage('ar')" data-lang="ar">العربية</button>
+            </div>
         </div>
     </nav>
 
     <!-- Page Header -->
     <section class="page-header">
-        <h1>Master the Art of <span>Panna Cotta</span></h1>
-        <p>Discover our signature recipes and professional techniques from PANNA LAB by BROS</p>
-        <p class="subtitle-ar">اكتشف وصفاتنا المميزة والتقنيات الاحترافية</p>
+        <h1 class="lang-en">Master the Art of <span>Panna Cotta</span></h1>
+        <h1 class="lang-ar">اتقن فن <span>البانا كوتا</span></h1>
+        
+        <p class="lang-en">Discover our signature recipes and professional techniques from PANNA LAB by BROS</p>
+        <p class="lang-ar" style="font-family: 'Amiri', serif; font-size: 1.8rem; direction: rtl;">اكتشف وصفاتنا المميزة والتقنيات الاحترافية من PANNA LAB by BROS</p>
     </section>
 
     <!-- Classic Recipe -->
@@ -626,11 +704,11 @@
         <div class="recipe-card">
             <h2 class="recipe-title">
                 <span>🍮</span>
-                Classic Panna Cotta Base
+                <span class="lang-en">Classic Panna Cotta Base</span>
+                <span class="lang-ar">الوصفة الكلاسيكية الأساسية</span>
             </h2>
-            <p class="recipe-title-ar">الوصفة الكلاسيكية الأساسية</p>
 
-            <div class="recipe-meta">
+            <div class="recipe-meta lang-en">
                 <div class="meta-item">
                     <span>⏱️</span>
                     <span><strong>Prep:</strong> 15 min</span>
@@ -645,48 +723,113 @@
                 </div>
             </div>
 
-            <div class="recipe-section">
-                <h3 class="section-title">
-                    <span>📝</span>
-                    Ingredients
-                </h3>
-                <ul class="ingredient-list">
-                    <li>500ml heavy cream (35% fat content)</li>
-                    <li>250ml whole milk</li>
-                    <li>100g granulated sugar</li>
-                    <li>2 teaspoons pure vanilla extract (or 1 vanilla bean)</li>
-                    <li>3 sheets gelatin (or 7g powdered gelatin)</li>
-                    <li>Pinch of salt</li>
-                </ul>
+            <div class="recipe-meta lang-ar" style="direction: rtl;">
+                <div class="meta-item">
+                    <span>⏱️</span>
+                    <span><strong>التحضير:</strong> 15 دقيقة</span>
+                </div>
+                <div class="meta-item">
+                    <span>❄️</span>
+                    <span><strong>التبريد:</strong> 4-6 ساعات</span>
+                </div>
+                <div class="meta-item">
+                    <span>🍽️</span>
+                    <span><strong>الحصص:</strong> 6-8 حصص</span>
+                </div>
             </div>
 
-            <div class="recipe-section">
-                <h3 class="section-title">
-                    <span>👨‍🍳</span>
-                    Instructions
-                </h3>
-                <ol class="instruction-list">
-                    <li>Bloom the gelatin sheets in cold water for 5-10 minutes until soft. If using powder, bloom in 3 tablespoons cold water.</li>
-                    <li>In a saucepan, combine cream, milk, sugar, and salt. Heat over medium heat, stirring occasionally until sugar dissolves completely. Do not boil.</li>
-                    <li>Once the mixture is hot (around 70°C), remove from heat. Squeeze excess water from gelatin sheets and add to the warm cream mixture. Stir until completely dissolved.</li>
-                    <li>Add vanilla extract (or scrape vanilla bean seeds into mixture). Stir well to combine.</li>
-                    <li>Strain the mixture through a fine-mesh sieve into a clean bowl to remove any lumps.</li>
-                    <li>Pour into serving glasses or ramekins, filling about ⅔ full to leave room for toppings.</li>
-                    <li>Cover with plastic wrap and refrigerate for at least 4-6 hours, or overnight for best results.</li>
-                    <li>Once set, add your favorite flavor topping and serve chilled.</li>
-                </ol>
+            <!-- English Version -->
+            <div class="lang-en">
+                <div class="recipe-section">
+                    <h3 class="section-title">
+                        <span>📝</span>
+                        Ingredients
+                    </h3>
+                    <ul class="ingredient-list">
+                        <li>500ml heavy cream (35% fat content)</li>
+                        <li>250ml whole milk</li>
+                        <li>100g granulated sugar</li>
+                        <li>2 teaspoons pure vanilla extract (or 1 vanilla bean)</li>
+                        <li>3 sheets gelatin (or 7g powdered gelatin)</li>
+                        <li>Pinch of salt</li>
+                    </ul>
+                </div>
+
+                <div class="recipe-section">
+                    <h3 class="section-title">
+                        <span>👨‍🍳</span>
+                        Instructions
+                    </h3>
+                    <ol class="instruction-list">
+                        <li>Bloom the gelatin sheets in cold water for 5-10 minutes until soft. If using powder, bloom in 3 tablespoons cold water.</li>
+                        <li>In a saucepan, combine cream, milk, sugar, and salt. Heat over medium heat, stirring occasionally until sugar dissolves completely. Do not boil.</li>
+                        <li>Once the mixture is hot (around 70°C), remove from heat. Squeeze excess water from gelatin sheets and add to the warm cream mixture. Stir until completely dissolved.</li>
+                        <li>Add vanilla extract (or scrape vanilla bean seeds into mixture). Stir well to combine.</li>
+                        <li>Strain the mixture through a fine-mesh sieve into a clean bowl to remove any lumps.</li>
+                        <li>Pour into serving glasses or ramekins, filling about ⅔ full to leave room for toppings.</li>
+                        <li>Cover with plastic wrap and refrigerate for at least 4-6 hours, or overnight for best results.</li>
+                        <li>Once set, add your favorite flavor topping and serve chilled.</li>
+                    </ol>
+                </div>
+
+                <div class="pro-tips">
+                    <h4>💎 BROS Professional Tips</h4>
+                    <ul>
+                        <li><strong>Temperature Control:</strong> Never let the cream mixture boil as it can affect the gelatin's setting ability and create a grainy texture.</li>
+                        <li><strong>Gelatin Quality:</strong> Use high-quality gelatin for the smoothest texture. Sheet gelatin gives superior results.</li>
+                        <li><strong>Straining is Essential:</strong> Always strain your mixture to achieve that signature silky-smooth texture.</li>
+                        <li><strong>Serving Vessels:</strong> Use clear glasses to showcase the beautiful layers when adding fruit toppings.</li>
+                        <li><strong>Make-Ahead:</strong> Panna cotta can be made 2-3 days in advance, making it perfect for batch production.</li>
+                        <li><strong>Setting Time:</strong> For faster service during Ramadan rush, use smaller portions that set in 2-3 hours.</li>
+                    </ul>
+                </div>
             </div>
 
-            <div class="pro-tips">
-                <h4>💎 BROS Professional Tips</h4>
-                <ul>
-                    <li><strong>Temperature Control:</strong> Never let the cream mixture boil as it can affect the gelatin's setting ability and create a grainy texture.</li>
-                    <li><strong>Gelatin Quality:</strong> Use high-quality gelatin for the smoothest texture. Sheet gelatin gives superior results.</li>
-                    <li><strong>Straining is Essential:</strong> Always strain your mixture to achieve that signature silky-smooth texture.</li>
-                    <li><strong>Serving Vessels:</strong> Use clear glasses to showcase the beautiful layers when adding fruit toppings.</li>
-                    <li><strong>Make-Ahead:</strong> Panna cotta can be made 2-3 days in advance, making it perfect for batch production.</li>
-                    <li><strong>Setting Time:</strong> For faster service during Ramadan rush, use smaller portions that set in 2-3 hours.</li>
-                </ul>
+            <!-- Arabic Version -->
+            <div class="lang-ar">
+                <div class="recipe-section">
+                    <h3 class="section-title">
+                        <span>📝</span>
+                        المقادير
+                    </h3>
+                    <ul class="ingredient-list">
+                        <li>500 مل كريمة ثقيلة (35% دسم)</li>
+                        <li>250 مل حليب كامل الدسم</li>
+                        <li>100 جرام سكر حبيبات</li>
+                        <li>2 ملعقة صغيرة خلاصة فانيليا نقية (أو 1 عود فانيليا)</li>
+                        <li>3 ورقات جيلاتين (أو 7 جرام جيلاتين مسحوق)</li>
+                        <li>رشة ملح</li>
+                    </ul>
+                </div>
+
+                <div class="recipe-section">
+                    <h3 class="section-title">
+                        <span>👨‍🍳</span>
+                        طريقة التحضير
+                    </h3>
+                    <ol class="instruction-list">
+                        <li>انقع أوراق الجيلاتين في الماء البارد لمدة 5-10 دقائق حتى تلين. إذا كنت تستخدم المسحوق، انقعه في 3 ملاعق كبيرة ماء بارد.</li>
+                        <li>في قدر، اخلط الكريمة والحليب والسكر والملح. سخن على نار متوسطة مع التحريك من حين لآخر حتى يذوب السكر تمامًا. لا تدع الخليط يغلي.</li>
+                        <li>بمجرد أن يصبح الخليط ساخنًا (حوالي 70 درجة مئوية)، ارفعه عن النار. اعصر الماء الزائد من أوراق الجيلاتين وأضفها إلى خليط الكريمة الدافئ. حرك حتى يذوب تمامًا.</li>
+                        <li>أضف خلاصة الفانيليا (أو اكشط بذور عود الفانيليا في الخليط). حرك جيدًا للمزج.</li>
+                        <li>صفي الخليط من خلال مصفاة دقيقة في وعاء نظيف لإزالة أي كتل.</li>
+                        <li>اسكب في أكواب التقديم أو الرامكن، املأ حوالي ⅔ لترك مساحة للطبقة العلوية.</li>
+                        <li>غطي بغلاف بلاستيكي وضعه في الثلاجة لمدة 4-6 ساعات على الأقل، أو طوال الليل للحصول على أفضل النتائج.</li>
+                        <li>بمجرد أن يتماسك، أضف طبقة النكهة المفضلة لديك وقدمه باردًا.</li>
+                    </ol>
+                </div>
+
+                <div class="pro-tips">
+                    <h4>💎 نصائح احترافية من BROS</h4>
+                    <ul>
+                        <li><strong>التحكم في درجة الحرارة:</strong> لا تدع خليط الكريمة يغلي أبدًا لأن ذلك قد يؤثر على قدرة الجيلاتين على التماسك ويخلق قوامًا محببًا.</li>
+                        <li><strong>جودة الجيلاتين:</strong> استخدم جيلاتين عالي الجودة للحصول على أنعم قوام. جيلاتين الأوراق يعطي نتائج متفوقة.</li>
+                        <li><strong>التصفية ضرورية:</strong> صفي خليطك دائمًا للحصول على ذلك القوام الحريري المميز.</li>
+                        <li><strong>أوعية التقديم:</strong> استخدم أكواب شفافة لعرض الطبقات الجميلة عند إضافة الفواكه.</li>
+                        <li><strong>التحضير المسبق:</strong> يمكن صنع البانا كوتا قبل 2-3 أيام، مما يجعلها مثالية للإنتاج بالجملة.</li>
+                        <li><strong>وقت التماسك:</strong> للخدمة الأسرع خلال ذروة رمضان، استخدم حصصًا أصغر تتماسك في 2-3 ساعات.</li>
+                    </ul>
+                </div>
             </div>
         </div>
     </section>
@@ -694,8 +837,8 @@
     <!-- Flavor Variations -->
     <section class="flavors-section">
         <div class="section-header">
-            <h2>Signature Flavor Toppings</h2>
-            <p>توبينغات النكهات المميزة</p>
+            <h2 class="lang-en">Signature Flavor Toppings</h2>
+            <h2 class="lang-ar">توبينغات النكهات المميزة</h2>
         </div>
 
         <div class="flavors-grid">
@@ -704,11 +847,11 @@
                 <div class="flavor-header">
                     <span class="flavor-icon">🥭</span>
                     <div>
-                        <h3 class="flavor-name">Mango Topping</h3>
-                        <p class="flavor-name-ar">طبقة المانجو</p>
+                        <h3 class="flavor-name lang-en">Mango Topping</h3>
+                        <h3 class="flavor-name lang-ar">طبقة المانجو</h3>
                     </div>
                 </div>
-                <div class="flavor-ingredients">
+                <div class="flavor-ingredients lang-en">
                     <h5>Ingredients:</h5>
                     <ul>
                         <li>300g fresh or frozen mango chunks</li>
@@ -722,6 +865,20 @@
                         Gently pour over set panna cotta. Refrigerate for 30 minutes before serving.
                     </p>
                 </div>
+                <div class="flavor-ingredients lang-ar">
+                    <h5>المقادير:</h5>
+                    <ul>
+                        <li>300 جرام مانجو طازجة أو مجمدة</li>
+                        <li>50 جرام سكر (حسب الرغبة)</li>
+                        <li>2 ملعقة كبيرة عصير ليمون</li>
+                        <li>1 ملعقة كبيرة ماء</li>
+                    </ul>
+                    <h5 style="margin-top: 1.2rem;">الطريقة:</h5>
+                    <p style="font-size: 1.1rem; color: var(--text-secondary); margin-top: 0.5rem; line-height: 1.6;">
+                        اخلط المانجو والسكر وعصير الليمون والماء حتى يصبح الخليط ناعمًا. صفّي للحصول على قوام حريري. 
+                        اسكب برفق فوق البانا كوتا المتماسكة. ضعها في الثلاجة لمدة 30 دقيقة قبل التقديم.
+                    </p>
+                </div>
             </div>
 
             <!-- Strawberry -->
@@ -729,11 +886,11 @@
                 <div class="flavor-header">
                     <span class="flavor-icon">🍓</span>
                     <div>
-                        <h3 class="flavor-name">Strawberry Topping</h3>
-                        <p class="flavor-name-ar">طبقة الفراولة</p>
+                        <h3 class="flavor-name lang-en">Strawberry Topping</h3>
+                        <h3 class="flavor-name lang-ar">طبقة الفراولة</h3>
                     </div>
                 </div>
-                <div class="flavor-ingredients">
+                <div class="flavor-ingredients lang-en">
                     <h5>Ingredients:</h5>
                     <ul>
                         <li>300g fresh strawberries, hulled</li>
@@ -747,6 +904,20 @@
                         Add vanilla. Layer over panna cotta and chill for 30 minutes to set slightly.
                     </p>
                 </div>
+                <div class="flavor-ingredients lang-ar">
+                    <h5>المقادير:</h5>
+                    <ul>
+                        <li>300 جرام فراولة طازجة منزوعة الأوراق</li>
+                        <li>60 جرام سكر</li>
+                        <li>1 ملعقة كبيرة عصير ليمون</li>
+                        <li>½ ملعقة صغيرة خلاصة فانيليا</li>
+                    </ul>
+                    <h5 style="margin-top: 1.2rem;">الطريقة:</h5>
+                    <p style="font-size: 1.1rem; color: var(--text-secondary); margin-top: 0.5rem; line-height: 1.6;">
+                        اخلط الفراولة مع السكر وعصير الليمون. صفّي لإزالة البذور. 
+                        أضف الفانيليا. ضع طبقات فوق البانا كوتا وبرّد لمدة 30 دقيقة حتى يتماسك قليلاً.
+                    </p>
+                </div>
             </div>
 
             <!-- Chocolate Hazelnut -->
@@ -754,11 +925,11 @@
                 <div class="flavor-header">
                     <span class="flavor-icon">🍫</span>
                     <div>
-                        <h3 class="flavor-name">Chocolate Hazelnut</h3>
-                        <p class="flavor-name-ar">شوكولاتة بالبندق</p>
+                        <h3 class="flavor-name lang-en">Chocolate Hazelnut</h3>
+                        <h3 class="flavor-name lang-ar">شوكولاتة بالبندق</h3>
                     </div>
                 </div>
-                <div class="flavor-ingredients">
+                <div class="flavor-ingredients lang-en">
                     <h5>Ingredients:</h5>
                     <ul>
                         <li>150g Nutella or chocolate hazelnut spread</li>
@@ -772,6 +943,20 @@
                         Let cool slightly, then spoon over panna cotta. Top with chopped hazelnuts.
                     </p>
                 </div>
+                <div class="flavor-ingredients lang-ar">
+                    <h5>المقادير:</h5>
+                    <ul>
+                        <li>150 جرام نوتيلا أو كريمة شوكولاتة بالبندق</li>
+                        <li>100 مل كريمة ثقيلة دافئة</li>
+                        <li>1 ملعقة كبيرة مسحوق كاكاو (اختياري للكثافة)</li>
+                        <li>بندق مفروم للتزيين</li>
+                    </ul>
+                    <h5 style="margin-top: 1.2rem;">الطريقة:</h5>
+                    <p style="font-size: 1.1rem; color: var(--text-secondary); margin-top: 0.5rem; line-height: 1.6;">
+                        سخّن الكريمة واخفق كريمة البندق حتى تصبح ناعمة ولامعة. 
+                        اتركها لتبرد قليلاً، ثم ضعها فوق البانا كوتا. زيّن بالبندق المفروم.
+                    </p>
+                </div>
             </div>
 
             <!-- Caramel Banana -->
@@ -779,11 +964,11 @@
                 <div class="flavor-header">
                     <span class="flavor-icon">🍌</span>
                     <div>
-                        <h3 class="flavor-name">Caramel Banana</h3>
-                        <p class="flavor-name-ar">كراميل موز</p>
+                        <h3 class="flavor-name lang-en">Caramel Banana</h3>
+                        <h3 class="flavor-name lang-ar">كراميل موز</h3>
                     </div>
                 </div>
-                <div class="flavor-ingredients">
+                <div class="flavor-ingredients lang-en">
                     <h5>Ingredients:</h5>
                     <ul>
                         <li>2 ripe bananas, mashed</li>
@@ -797,6 +982,20 @@
                         Swirl caramel sauce into banana puree. Layer over panna cotta and drizzle extra caramel on top.
                     </p>
                 </div>
+                <div class="flavor-ingredients lang-ar">
+                    <h5>المقادير:</h5>
+                    <ul>
+                        <li>2 موز ناضج مهروس</li>
+                        <li>100 جرام صلصة كراميل (منزلية أو جاهزة عالية الجودة)</li>
+                        <li>1 ملعقة كبيرة عصير ليمون</li>
+                        <li>رشة قرفة</li>
+                    </ul>
+                    <h5 style="margin-top: 1.2rem;">الطريقة:</h5>
+                    <p style="font-size: 1.1rem; color: var(--text-secondary); margin-top: 0.5rem; line-height: 1.6;">
+                        اخلط الموز مع عصير الليمون والقرفة حتى يصبح ناعمًا. 
+                        امزج صلصة الكراميل مع هريس الموز. ضع طبقات فوق البانا كوتا ورش كراميل إضافي في الأعلى.
+                    </p>
+                </div>
             </div>
 
             <!-- Pineapple -->
@@ -804,11 +1003,11 @@
                 <div class="flavor-header">
                     <span class="flavor-icon">🍍</span>
                     <div>
-                        <h3 class="flavor-name">Pineapple Topping</h3>
-                        <p class="flavor-name-ar">طبقة الأناناس</p>
+                        <h3 class="flavor-name lang-en">Pineapple Topping</h3>
+                        <h3 class="flavor-name lang-ar">طبقة الأناناس</h3>
                     </div>
                 </div>
-                <div class="flavor-ingredients">
+                <div class="flavor-ingredients lang-en">
                     <h5>Ingredients:</h5>
                     <ul>
                         <li>300g fresh pineapple chunks</li>
@@ -822,6 +1021,20 @@
                         Pour over panna cotta. Garnish with fresh mint and a small pineapple wedge.
                     </p>
                 </div>
+                <div class="flavor-ingredients lang-ar">
+                    <h5>المقادير:</h5>
+                    <ul>
+                        <li>300 جرام أناناس طازج مقطع</li>
+                        <li>40 جرام سكر</li>
+                        <li>1 ملعقة كبيرة عصير ليمون أخضر</li>
+                        <li>أوراق نعناع طازجة للتزيين</li>
+                    </ul>
+                    <h5 style="margin-top: 1.2rem;">الطريقة:</h5>
+                    <p style="font-size: 1.1rem; color: var(--text-secondary); margin-top: 0.5rem; line-height: 1.6;">
+                        اخلط الأناناس مع السكر وعصير الليمون. صفّي للحصول على قوام ناعم. 
+                        اسكب فوق البانا كوتا. زيّن بالنعناع الطازج وقطعة صغيرة من الأناناس.
+                    </p>
+                </div>
             </div>
 
             <!-- Orange Blossom & Honey -->
@@ -829,11 +1042,11 @@
                 <div class="flavor-header">
                     <span class="flavor-icon">🌸</span>
                     <div>
-                        <h3 class="flavor-name">Orange Blossom & Honey</h3>
-                        <p class="flavor-name-ar">زهرة برتقال + عسل</p>
+                        <h3 class="flavor-name lang-en">Orange Blossom & Honey</h3>
+                        <h3 class="flavor-name lang-ar">زهرة برتقال وعسل</h3>
                     </div>
                 </div>
-                <div class="flavor-ingredients">
+                <div class="flavor-ingredients lang-en">
                     <h5>Ingredients:</h5>
                     <ul>
                         <li>100g quality honey</li>
@@ -848,6 +1061,21 @@
                         Drizzle over panna cotta, garnish with orange zest and crushed pistachios for Algerian flair.
                     </p>
                 </div>
+                <div class="flavor-ingredients lang-ar">
+                    <h5>المقادير:</h5>
+                    <ul>
+                        <li>100 جرام عسل عالي الجودة</li>
+                        <li>1 ملعقة كبيرة ماء زهر البرتقال</li>
+                        <li>برش برتقالة واحدة</li>
+                        <li>2 ملعقة كبيرة ماء دافئ</li>
+                        <li>فستق مطحون للتزيين</li>
+                    </ul>
+                    <h5 style="margin-top: 1.2rem;">الطريقة:</h5>
+                    <p style="font-size: 1.1rem; color: var(--text-secondary); margin-top: 0.5rem; line-height: 1.6;">
+                        امزج العسل مع ماء زهر البرتقال والماء الدافئ حتى يصبح ناعمًا. 
+                        رش فوق البانا كوتا، زيّن ببرش البرتقال والفستق المطحون للمسة جزائرية.
+                    </p>
+                </div>
             </div>
         </div>
     </section>
@@ -856,98 +1084,152 @@
     <section class="strategy-section">
         <div class="strategy-container">
             <div class="strategy-header">
-                <h2>BROS Business Strategy Guide</h2>
-                <p>دليل الاستراتيجية التجارية</p>
+                <h2 class="lang-en">BROS Business Strategy Guide</h2>
+                <h2 class="lang-ar">دليل الاستراتيجية التجارية من BROS</h2>
             </div>
 
             <div class="strategy-grid">
                 <div class="strategy-card">
                     <span class="strategy-icon">🎯</span>
-                    <h3>Ramadan Rush Ready</h3>
-                    <p>
+                    <h3 class="lang-en">Ramadan Rush Ready</h3>
+                    <h3 class="lang-ar">جاهز لذروة رمضان</h3>
+                    <p class="lang-en">
                         Pre-make classic bases in bulk 24 hours ahead. Store in refrigerators and add fresh toppings 
                         per order. This allows for 10x faster service during peak iftar hours while maintaining quality. 
                         Use smaller 100ml portions for quick setting and easier inventory management.
+                    </p>
+                    <p class="lang-ar">
+                        حضّر القواعد الكلاسيكية بكميات كبيرة قبل 24 ساعة. احفظها في الثلاجات وأضف الطبقات العلوية الطازجة 
+                        حسب الطلب. هذا يسمح بخدمة أسرع 10 مرات خلال ساعات الإفطار الذروة مع الحفاظ على الجودة. 
+                        استخدم حصص أصغر 100 مل للتماسك السريع وإدارة أسهل للمخزون.
                     </p>
                 </div>
 
                 <div class="strategy-card">
                     <span class="strategy-icon">📦</span>
-                    <h3>Smart Packaging</h3>
-                    <p>
+                    <h3 class="lang-en">Smart Packaging</h3>
+                    <h3 class="lang-ar">التغليف الذكي</h3>
+                    <p class="lang-en">
                         Invest in premium clear cups with dome lids to showcase your beautiful layers. 
                         Include wooden spoons for eco-friendly appeal. Add PANNA LAB by BROS stickers on every cup 
                         for brand recognition. Create Instagram-worthy packaging that customers want to share.
+                    </p>
+                    <p class="lang-ar">
+                        استثمر في أكواب شفافة فاخرة بأغطية قبة لعرض طبقاتك الجميلة. 
+                        اشمل ملاعق خشبية للجاذبية الصديقة للبيئة. أضف ملصقات PANNA LAB by BROS على كل كوب 
+                        للتعرف على العلامة التجارية. أنشئ تغليفًا جذابًا لإنستغرام يرغب العملاء في مشاركته.
                     </p>
                 </div>
 
                 <div class="strategy-card">
                     <span class="strategy-icon">💰</span>
-                    <h3>Pricing Strategy</h3>
-                    <p>
+                    <h3 class="lang-en">Pricing Strategy</h3>
+                    <h3 class="lang-ar">استراتيجية التسعير</h3>
+                    <p class="lang-en">
                         Position as a premium dessert option. Price 20-30% higher than standard desserts due to 
                         artisan quality and unique offering. Offer combo deals with Bros Burgers meals. 
                         Create "Ramadan Special Boxes" with 4-6 different flavors for families.
+                    </p>
+                    <p class="lang-ar">
+                        ضع نفسك كخيار حلوى فاخر. سعّر 20-30% أعلى من الحلويات العادية بسبب 
+                        الجودة الحرفية والعرض الفريد. قدم عروض كومبو مع وجبات بروس برجر. 
+                        أنشئ "صناديق رمضان الخاصة" مع 4-6 نكهات مختلفة للعائلات.
                     </p>
                 </div>
 
                 <div class="strategy-card">
                     <span class="strategy-icon">📱</span>
-                    <h3>Social Media Magic</h3>
-                    <p>
+                    <h3 class="lang-en">Social Media Magic</h3>
+                    <h3 class="lang-ar">سحر وسائل التواصل الاجتماعي</h3>
+                    <p class="lang-en">
                         Film the layering process in slow-motion - it's mesmerizing content. Share customer reactions 
                         during iftar. Post "flavor of the day" stories. Run polls for new flavor ideas. 
                         Create a signature hashtag #PannaLabExperience for user-generated content.
+                    </p>
+                    <p class="lang-ar">
+                        صوّر عملية التطبيق بالحركة البطيئة - محتوى ساحر. شارك ردود فعل العملاء 
+                        خلال الإفطار. انشر قصص "نكهة اليوم". أجرِ استطلاعات لأفكار نكهات جديدة. 
+                        أنشئ هاشتاج مميز #PannaLabExperience للمحتوى الذي ينشئه المستخدمون.
                     </p>
                 </div>
 
                 <div class="strategy-card">
                     <span class="strategy-icon">🔄</span>
-                    <h3>Seasonal Rotation</h3>
-                    <p>
+                    <h3 class="lang-en">Seasonal Rotation</h3>
+                    <h3 class="lang-ar">التدوير الموسمي</h3>
+                    <p class="lang-en">
                         Keep core flavors year-round but introduce limited-edition seasonal flavors monthly. 
                         This creates urgency and repeat customers. Use local Algerian ingredients like dates, 
                         figs, or rose water for unique regional flavors that competitors can't easily replicate.
+                    </p>
+                    <p class="lang-ar">
+                        احتفظ بالنكهات الأساسية طوال العام لكن قدّم نكهات موسمية محدودة الإصدار شهريًا. 
+                        هذا يخلق الإلحاح والعملاء المتكررين. استخدم مكونات جزائرية محلية مثل التمر، 
+                        التين، أو ماء الورد لنكهات إقليمية فريدة لا يستطيع المنافسون تكرارها بسهولة.
                     </p>
                 </div>
 
                 <div class="strategy-card">
                     <span class="strategy-icon">🤝</span>
-                    <h3>Cross-Promotion Power</h3>
-                    <p>
+                    <h3 class="lang-en">Cross-Promotion Power</h3>
+                    <h3 class="lang-ar">قوة الترويج المتبادل</h3>
+                    <p class="lang-en">
                         Leverage Bros Burgers' existing customer base. Train burger staff to recommend panna cotta 
                         as the perfect sweet ending. Create "Complete Meal" promotions. Use shared delivery systems 
                         to reduce costs. Your dessert completes their savory experience - perfect synergy.
+                    </p>
+                    <p class="lang-ar">
+                        استفد من قاعدة عملاء بروس برجر الحالية. درّب موظفي البرجر على التوصية بالبانا كوتا 
+                        كنهاية حلوة مثالية. أنشئ عروض "وجبة كاملة". استخدم أنظمة التوصيل المشتركة 
+                        لتقليل التكاليف. حلواك تكمل تجربتهم المالحة - تآزر مثالي.
                     </p>
                 </div>
 
                 <div class="strategy-card">
                     <span class="strategy-icon">⚡</span>
-                    <h3>Quality Control</h3>
-                    <p>
+                    <h3 class="lang-en">Quality Control</h3>
+                    <h3 class="lang-ar">مراقبة الجودة</h3>
+                    <p class="lang-en">
                         Maintain strict standards - every panna cotta should have the same silky texture and beautiful 
                         presentation. Train staff on proper portioning and layering techniques. Taste-test batches daily. 
                         Quality consistency builds reputation faster than any marketing.
+                    </p>
+                    <p class="lang-ar">
+                        حافظ على معايير صارمة - كل بانا كوتا يجب أن تمتلك نفس القوام الحريري والعرض الجميل. 
+                        درّب الموظفين على تقنيات التقسيم والتطبيق الصحيحة. اختبر مذاق الدفعات يوميًا. 
+                        اتساق الجودة يبني السمعة أسرع من أي تسويق.
                     </p>
                 </div>
 
                 <div class="strategy-card">
                     <span class="strategy-icon">🎁</span>
-                    <h3>Gift & Catering</h3>
-                    <p>
+                    <h3 class="lang-en">Gift & Catering</h3>
+                    <h3 class="lang-ar">الهدايا والتموين</h3>
+                    <p class="lang-en">
                         Offer gift boxes for special occasions (Eid, weddings, celebrations). 
                         Create catering packages for events with mix-and-match flavor options. 
                         Develop corporate gifting programs. This diversifies revenue beyond daily walk-ins.
+                    </p>
+                    <p class="lang-ar">
+                        قدّم صناديق هدايا للمناسبات الخاصة (العيد، الأعراس، الاحتفالات). 
+                        أنشئ باقات تموين للفعاليات مع خيارات مزج ومطابقة النكهات. 
+                        طوّر برامج هدايا الشركات. هذا ينوع الإيرادات خارج الزيارات اليومية.
                     </p>
                 </div>
 
                 <div class="strategy-card">
                     <span class="strategy-icon">📊</span>
-                    <h3>Data-Driven Decisions</h3>
-                    <p>
+                    <h3 class="lang-en">Data-Driven Decisions</h3>
+                    <h3 class="lang-ar">قرارات مبنية على البيانات</h3>
+                    <p class="lang-en">
                         Track which flavors sell best and when. Monitor customer feedback closely. 
                         Adjust production based on demand patterns. Use WhatsApp pre-orders to forecast daily needs. 
                         Minimize waste while ensuring you never run out of bestsellers during peak hours.
+                    </p>
+                    <p class="lang-ar">
+                        تتبع أي النكهات تباع بشكل أفضل ومتى. راقب ملاحظات العملاء عن كثب. 
+                        اضبط الإنتاج بناءً على أنماط الطلب. استخدم طلبات واتساب المسبقة للتنبؤ بالاحتياجات اليومية. 
+                        قلل الهدر مع ضمان عدم نفاد الأكثر مبيعًا خلال ساعات الذروة.
                     </p>
                 </div>
             </div>
@@ -956,8 +1238,38 @@
 
     <!-- Footer -->
     <footer>
-        <p>© 2026 PANNA LAB by BROS | <a href="index.html">Back to Home</a></p>
-        <p style="margin-top: 0.5rem; font-size: 0.95rem;">A delicious creation from Bros Burgers</p>
+        <p class="lang-en">© 2026 PANNA LAB by BROS | <a href="index.html">Back to Home</a></p>
+        <p class="lang-ar">© 2026 PANNA LAB by BROS | <a href="index.html">العودة للرئيسية</a></p>
+        <p class="lang-en" style="margin-top: 0.5rem; font-size: 0.95rem;">A delicious creation from Bros Burgers</p>
+        <p class="lang-ar" style="margin-top: 0.5rem; font-size: 0.95rem;">إبداع لذيذ من بروس برجر</p>
     </footer>
+
+    <script>
+        // Language Toggle Functionality
+        function setLanguage(lang) {
+            // Update body data attribute
+            document.body.setAttribute('data-lang', lang);
+            
+            // Update active button state
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.getAttribute('data-lang') === lang) {
+                    btn.classList.add('active');
+                }
+            });
+            
+            // Save preference to localStorage
+            localStorage.setItem('pannaLabLanguage', lang);
+            
+            // Smooth scroll to top after language change
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        
+        // Load saved language preference on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedLang = localStorage.getItem('pannaLabLanguage') || 'en';
+            setLanguage(savedLang);
+        });
+    </script>
 </body>
 </html>
